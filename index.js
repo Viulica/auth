@@ -21,7 +21,7 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: 'a long, randomly-generated string stored in env',
-  baseURL: 'http://172.20.10.2:3000',
+  baseURL: 'https://auth-1-9m3o.onrender.com',
   clientID: 'IIC5pl9kVIIyVpWc9mT7OCz5M7okIsSJ',
   issuerBaseURL: 'https://dev-6nsq4o4pvx024k2l.us.auth0.com'
 };
