@@ -48,6 +48,10 @@ document.getElementById('ticketForm').addEventListener('submit', async function 
             body: JSON.stringify({ vatin, firstName, lastName })
         });
 
+        console.log(response);
+        const data1 = await response.text(); 
+        console.log(data1); 
+
         const data = await response.json();
 
         if (response.ok) {
