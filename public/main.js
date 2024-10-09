@@ -49,17 +49,20 @@ document.getElementById('ticketForm').addEventListener('submit', async function 
         });
 
         console.log(response);
-        const data1 = await response.text(); 
-        console.log(data1); 
+
 
         const data = await response.json();
+        console.log(data);
+
 
         if (response.ok) {
+            console.log("hello world")
             messageDiv.innerHTML = `<p>Ticket created successfully! Ticket ID: ${data.ticket_id}</p>`;
             qrCodeDiv.innerHTML = `<img src="${data.qrCode}" alt="QR Code for your ticket" />`; 
 
             updateTicketCount();
         } else {
+            console.log("hello world2")
             if (data.error === 'MaxTicketsExceeded') {
                 messageDiv.innerHTML = `<p style="color: red;">${data.message}</p>`;
             } else {
@@ -67,6 +70,7 @@ document.getElementById('ticketForm').addEventListener('submit', async function 
             }
         }
     } catch (error) {
+        console.log("errrroorrrrrr");
         console.error('Error:', error);
         messageDiv.innerHTML = `<p style="color: red;">An unexpected error occurred. Please try again later.</p>`;
     }
