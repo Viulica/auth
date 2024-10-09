@@ -39,7 +39,7 @@ document.getElementById('ticketForm').addEventListener('submit', async function 
     }
 
     try {
-        const response = await fetch('http://172.20.10.2:3000/create-ticket', {
+        const response = await fetch('https://auth-1-9m3o.onrender.com/create-ticket', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
