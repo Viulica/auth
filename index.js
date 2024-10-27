@@ -47,8 +47,8 @@ app.get('/', async (req, res) => {
     const result = await db.query(query);
 
   } catch (err) {
-    console.error('Error retrieving ticket count:', err);
-    res.status(500).send('Error retrieving ticket count');
+    console.error('Error getting ticket count:', err);
+    res.status(500).send('Error getting ticket count');
   }
 });
 
@@ -58,7 +58,7 @@ app.post('/create-ticket', checkJwt, async (req, res) => {
   const { vatin, firstName, lastName } = req.body;
 
   if (!vatin || !firstName || !lastName) {
-    return res.status(400).send('All fields are required: vatin, firstName, lastName');
+    return res.status(400).send('Sva polja trebaju biti popunjena: vatin, firstName, lastName');
   }
 
   try {
@@ -68,8 +68,8 @@ app.post('/create-ticket', checkJwt, async (req, res) => {
     const checkResult = await db.query(checkQuery, checkValues);
     const ticketCount = parseInt(checkResult.rows[0].count);
 
-    if (ticketCount > 3) {
-      return res.status(400).json({ error: 'MaxTicketsExceeded', message: 'This VATIN (OIB) has already generated the maximum of 3 tickets.' });
+    if (ticketCount >= 3) {
+      return res.status(400).json({ error: 'MaxTicketsExceeded', message: 'Za isti OIB se mogu generirati maximalno 3 ulaznice!' });
     }
     
 
@@ -90,19 +90,18 @@ app.post('/create-ticket', checkJwt, async (req, res) => {
     res.status(201).json({
       ticket_id: ticket.ticket_id,
       qrCode, 
-      message: 'Ticket created successfully!'
+      message: 'Ulaznica je uspješno kreirana!'
     });
 
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Error creating ticket');
+    res.status(500).send('Greška pri kreiranju ulaznice.');
   }
 });
 
 
 app.get('/get-token', async (req, res) => {
   try {
-    console.log('Attempting to fetch token from Auth0...');
     
     const response = await fetch(`https://${process.env.AUTH0_DOMAIN}/oauth/token`, {
       method: 'POST',

@@ -44,9 +44,9 @@
 <body>
 
     <h1>Ticket Generation App</h1>
-    <p>Total tickets generated so far: <span id="ticketCount">Loading...</span></p>
+    <p>Broj dosad generiranih ulaznica: <span id="ticketCount">Loading...</span></p>
     <form id="ticketForm">
-        <label for="vatin">VATIN (OIB)</label>
+        <label for="vatin">OIB</label>
         <input type="text" id="vatin" name="vatin" required />
 
         <label for="firstName">First Name</label>
@@ -55,7 +55,7 @@
         <label for="lastName">Last Name</label>
         <input type="text" id="lastName" name="lastName" required />
 
-        <button type="submit">Generate Ticket</button>
+        <button type="submit">Generiraj ulaznicu</button>
 
         <div class="message" id="message"></div>
         <div id="qrCode"></div> 

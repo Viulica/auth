@@ -34,7 +34,7 @@ document.getElementById('ticketForm').addEventListener('submit', async function 
 
     const token = await getAuthToken();
     if (!token) {
-        messageDiv.innerHTML = `<p style="color: red;">Failed to retrieve authorization token</p>`;
+        messageDiv.innerHTML = `<p style="color: red;">Failed to get authorization token</p>`;
         return;
     }
 
@@ -57,7 +57,7 @@ document.getElementById('ticketForm').addEventListener('submit', async function 
 
         if (response.ok) {
             console.log("hello world")
-            messageDiv.innerHTML = `<p>Ticket created successfully! Ticket ID: ${data.ticket_id}</p>`;
+            messageDiv.innerHTML = `<p>Ulaznica uspješno kreirana! ID: ${data.ticket_id}</p>`;
             qrCodeDiv.innerHTML = `<img src="${data.qrCode}" alt="QR Code for your ticket" />`; 
 
             updateTicketCount();
@@ -66,13 +66,13 @@ document.getElementById('ticketForm').addEventListener('submit', async function 
             if (data.error === 'MaxTicketsExceeded') {
                 messageDiv.innerHTML = `<p style="color: red;">${data.message}</p>`;
             } else {
-                messageDiv.innerHTML = `<p style="color: red;">Error: ${data.message || 'An error occurred while creating the ticket.'}</p>`;
+                messageDiv.innerHTML = `<p style="color: red;">Error: ${data.message || 'Greška pri kreiranju ulaznice.'}</p>`;
             }
         }
     } catch (error) {
         console.log("errrroorrrrrr");
         console.error('Error:', error);
-        messageDiv.innerHTML = `<p style="color: red;">An unexpected error occurred. Please try again later.</p>`;
+        messageDiv.innerHTML = `<p style="color: red;">Greška!</p>`;
     }
 
 });
